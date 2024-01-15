@@ -14,6 +14,9 @@ import org.json.JSONObject
 
 class MainActivity : ComponentActivity() {
     private val client = OkHttpClient()
+
+    private val READ_STORAGE_PERMISSION_CODE = 123
+    private val PICK_IMAGE_REQUEST = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,8 +29,9 @@ class MainActivity : ComponentActivity() {
 
 
         buttonQuestion.setOnClickListener {
-            val userInput = editQuestion.text.toString()
-            chatgptservice.sendMessageToChatGPT(userInput){ response ->
+            //val userInput = editQuestion.text.toString()
+            val imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+            chatgptservice.sendMessageToChatGPT(imageUrl){ response ->
                 Log.d("ChatGPTResponse", response ?: "Error")
                 runOnUiThread {
 
