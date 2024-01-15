@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
 
         buttonQuestion.setOnClickListener {
             //val userInput = editQuestion.text.toString()
-            val imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+            val imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/250px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg"
             chatgptservice.sendMessageToChatGPT(imageUrl){ response ->
                 Log.d("ChatGPTResponse", response ?: "Error")
                 runOnUiThread {

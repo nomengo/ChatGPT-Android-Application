@@ -3,6 +3,7 @@ package com.example.chatgptschoolproject.ui.theme
 import android.content.Context
 import android.util.Base64
 import android.util.Log
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -29,6 +30,7 @@ class ChatGptService(context: Context) {
         val requestBody = JSONObject().apply {
             put("model", "gpt-4-vision-preview")
             put("messages", messagesArray)
+            put("max_tokens",1024)
         }
 
         val request = object: JsonObjectRequest(
@@ -59,6 +61,11 @@ class ChatGptService(context: Context) {
                 return super.parseNetworkError(volleyError)
             }
         }
+        request.retryPolicy = DefaultRetryPolicy(
+            10000,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
 
         requestQueue.add(request)
     }
@@ -89,7 +96,7 @@ class ChatGptService(context: Context) {
                 // Text part
                 val textPart = JSONObject()
                 textPart.put("type", "text")
-                textPart.put("text", "What’s in this image?")
+                textPart.put("text", "Provide information about the structure in this image.")
                 userContent.put(textPart)
 
                 // Image URL part
