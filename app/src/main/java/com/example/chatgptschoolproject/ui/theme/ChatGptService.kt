@@ -1,7 +1,6 @@
 package com.example.chatgptschoolproject.ui.theme
 
 import android.content.Context
-import android.util.Base64
 import android.util.Log
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
@@ -12,9 +11,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
 
 class ChatGptService(context: Context) {
     private val TAG="ChatGptService"
@@ -70,21 +66,6 @@ class ChatGptService(context: Context) {
         requestQueue.add(request)
     }
 
-    private fun encodeImageToBase64(imagePath: String): String {
-        var base64Image = ""
-        try {
-            val file = File(imagePath)
-            val buffer = ByteArray(file.length().toInt())
-            val inputStream = FileInputStream(file)
-            inputStream.read(buffer)
-            inputStream.close()
-            base64Image = Base64.encodeToString(buffer, Base64.DEFAULT)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return base64Image
-    }
-
     private fun createImageCompletionRequest(imageUrl: String): JSONArray {
         return JSONArray().apply {
             // User message
@@ -103,7 +84,7 @@ class ChatGptService(context: Context) {
                 val imageUrlPart = JSONObject()
                 imageUrlPart.put("type", "image_url")
                 val imageUrlObject = JSONObject()
-                imageUrlObject.put("url", imageUrl)
+                imageUrlObject.put("url", "data:image/jpeg;base64,$imageUrl")
                 imageUrlPart.put("image_url", imageUrlObject)
                 userContent.put(imageUrlPart)
 

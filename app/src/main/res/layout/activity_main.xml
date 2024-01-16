@@ -9,17 +9,6 @@
     android:padding="20dp"
     >
 
-    <EditText
-        android:id="@+id/editQuestion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="10dp"
-        android:textSize="20sp"
-        android:hint="Type the question here!"
-        android:inputType="text"
-         />
-
     <Button
         android:id="@+id/buttonQuestion"
         android:layout_width="match_parent"
@@ -28,7 +17,7 @@
         android:textSize="20sp"
         android:layout_margin="10dp"
         android:background="@color/design_default_color_on_primary"
-        android:text="Enter" />
+        android:text="Select Image" />
 
     <ScrollView
         android:layout_width="match_parent"
