@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 class ChatGptService(context: Context) {
     private val TAG="ChatGptService"
-    private val apiKey = "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" // Replace with your actual API key
+    private val apiKey = "" //You can put your own unique api key here.
     private val apiUrl = "https://api.openai.com/v1/chat/completions"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
 
@@ -24,9 +24,9 @@ class ChatGptService(context: Context) {
         val messagesArray = createImageCompletionRequest(imagePath)
 
         val requestBody = JSONObject().apply {
-            put("model", "gpt-4-vision-preview")
+            put("model", "gpt-4-vision-preview")// This whole process is for vision preview. If you change the model the whole program would stop working.
             put("messages", messagesArray)
-            put("max_tokens",1024)
+            put("max_tokens",500)
         }
 
         val request = object: JsonObjectRequest(
@@ -77,7 +77,7 @@ class ChatGptService(context: Context) {
                 // Text part
                 val textPart = JSONObject()
                 textPart.put("type", "text")
-                textPart.put("text", "Provide information about the structure in this image.")
+                textPart.put("text", "Resimdeki yapı hakkında bilgi ver.Yapının adı, yapılış zamanı ve tek cümlelik bir tarihi şeklinde. ")//You can put the prompt here.
                 userContent.put(textPart)
 
                 // Image URL part
